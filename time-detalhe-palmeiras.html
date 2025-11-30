@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🟢⚪ Detalhes e Elenco | Palmeiras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* CSS REPLICADO (Variáveis, Header, Nav, Footer) */
+        :root {
+            --primary-color: #004c99; 
+            --secondary-color: #ffc425; 
+            --background-color: #f8f9fa; 
+            --card-background: #ffffff;
+            --live-color: #cc0000;
+            /* A variável --team-color não será mais usada para cor de texto/borda principal */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: #343a40;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.2em;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--secondary-color);
+        }
+        
+        nav {
+            background-color: var(--card-background);
+            border-bottom: 3px solid var(--secondary-color);
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: white;
+            background-color: var(--primary-color);
+        }
+
+        /* Container Principal */
+        .container {
+            width: 95%;
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            padding-bottom: 5px;
+            border-bottom: 3px solid var(--secondary-color);
+            font-weight: 700;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            /* Mantendo um destaque visual com a cor secundária */
+            border-left: 5px solid var(--secondary-color); 
+            padding-left: 10px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        /* Destaque do Time */
+        .team-highlight {
+            background-color: var(--card-background);
+            /* Usando a cor secundária como destaque de borda */
+            border-left: 8px solid var(--secondary-color); 
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .team-highlight h1 {
+            font-size: 2.5em;
+            /* Usando a cor primária para o título do time */
+            color: var(--primary-color); 
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* NOVO ESTILO PARA A IMAGEM DA LOGO */
+        .team-logo-image {
+            width: 60px; 
+            height: 60px;
+            margin-right: 15px;
+            object-fit: contain; 
+        }
+
+        .team-stats {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .team-stats div {
+            flex: 1;
+            min-width: 150px;
+            background-color: #f4f4f4;
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-weight: 700;
+            color: #555;
+        }
+        
+        /* Tabela do Elenco (Roster) */
+        .roster-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: var(--card-background);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .roster-table th, .roster-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .roster-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85em;
+        }
+
+        .roster-table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .roster-table .player-position {
+            font-weight: 700;
+            /* Usando a cor primária para a posição */
+            color: var(--primary-color); 
+            width: 10%;
+        }
+
+        .roster-table .player-number {
+            font-weight: 900;
+            background-color: #ffe082;
+            color: var(--primary-color);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            font-size: 0.9em;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>LIGA MASTER DE FUTEBOL 🏆</h1>
+        <p>Acompanhamento Oficial de Resultados, Agenda e Estatísticas</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="classificacao.html">Classificação</a></li>
+            <li><a href="proximas-rodadas.html">Próximas rodadas</a></li>
+            <li><a href="artilharia.html">Artilharia</a></li>
+            <li><a href="times.html" class="active">Times</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        
+        <a href="times.html" style="display: inline-block; margin-bottom: 20px; color: var(--primary-color); text-decoration: none; font-weight: 700;">← Voltar à Lista de Times</a>
+
+        <div class="team-highlight">
+            <h1>
+                <img src="https://imgs.search.brave.com/YFA6d42eGKfy_5eCUo29P7jregIrsl0M2Vu2kvfMECQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc2Vla2xvZ28u/Y29tL2xvZ28tcG5n/LzEwLzIvcGFsbWVp/cmFzLWxvZ28tcG5n/X3NlZWtsb2dvLTEw/NTU1MS5wbmc" alt="Logo do Palmeiras" class="team-logo-image">
+                Palmeiras
+            </h1>
+            <p>O atual campeão da liga, conhecido por sua força defensiva e elenco estrelado.</p>
+
+            <div class="team-stats">
+                <div>🏟️ **Estádio:** Allianz Parque (Capacidade: 43.713)</div>
+                <div>👤 **Técnico:** R. Ferreira</div>
+                <div>📅 **Fundação:** 26 de Agosto de 1914</div>
+                <div>🏆 **Títulos na Liga:** 4</div>
+            </div>
+        </div>
+        
+        <hr>
+
+        <h2>📋 Elenco Principal - Temporada 2025</h2>
+
+        <table class="roster-table">
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 15%;">Posição</th>
+                    <th style="width: 35%;">Jogador</th>
+                    <th style="width: 15%; text-align: center;">Idade</th>
+                    <th style="width: 30%;">Nacionalidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="player-number">21</span></td>
+                    <td class="player-position">GOL</td>
+                    <td>Weverton</td>
+                    <td style="text-align: center;">36</td>
+                    <td>🇧🇷 Brasileiro</td>
+                </tr>
+                <tr>
+                    <td><span class="player-number">12</span></td>
+                    <td class="player-position">LAT</td>
+                    <td>Mayke</td>
+                    <td style="text-align: center;">32</td>
+                    <td>🇧🇷 Brasileiro</td>
+                </tr>
+                <tr>
+                    <td><span class="player-number">26</span></td>
+                    <td class="player-position">ZAG</td>
+                    <td>Murilo</td>
+                    <td style="text-align: center;">28</td>
+                    <td>🇧🇷 Brasileiro</td>
+                </tr>
+                <tr>
+                    <td><span class="player-number">4</span></td>
+                    <td class="player-position">ZAG</td>
+                    <td>Gustavo Gómez</td>
+                    <td style="text-align: center;">31</td>
+                    <td>🇵🇾 Paraguaio</td>
+                </tr>
+                <tr>
+                    <td><span class="player-number">8</span></td>
+                    <td class="player-position">VOL</td>
+                    <td>Zé Rafael</td>
+                    <td style="text-align: center;">31</td>
+                    <td>🇧🇷 Brasileiro</td>
+                </tr>
+                <tr>
+                    <td><span class="player-number">25</span></td>
+                    <td class="player-position">VOL</td>
+                    <td>Gabriel Menino</td>
+                    <td style="text-align: center;">24</td>
+                    <td>🇧🇷 Brasileiro</td>
+                </tr>
+                <tr>
+                    <td><span class="player-number">10</span></td>
+                    <td class="player-position">MEI</td>
+                    <td>Raphael Veiga</td>
+                    <td style="text-align: center;">29</td>
+                    <td>🇧🇷 Brasileiro</td>
+                </tr>
+                <tr>
+                    <td><span class="player-number">7</span></td>
+                    <td class="player-position">ATA</td>
+                    <td>Dudu</td>
+                    <td style="text-align: center;">33</td>
+                    <td>🇧🇷 Brasileiro</td>
+                </tr>
+                <tr>
+                    <td><span class="player-number">9</span></td>
+                    <td class="player-position">ATA</td>
+                    <td>Endrick</td>
+                    <td style="text-align: center;">19</td>
+                    <td>🇧🇷 Brasileiro</td>
+                </tr>
+                <tr>
+                    <td><span class="player-number">11</span></td>
+                    <td class="player-position">ATA</td>
+                    <td>Bruno Rodrigues</td>
+                    <td style="text-align: center;">28</td>
+                    <td>🇧🇷 Brasileiro</td>
+                </tr>
+                
+            </tbody>
+        </table>
+
+    </div>
+
+    <footer>
+        <p>Liga Master de Futebol | Plataforma Oficial de Estatísticas | Copyright © 2025</p>
+    </footer>
+
+</body>
+</html>

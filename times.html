@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👥 Times | Liga Master de Futebol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* CSS REPLICADO (Variáveis, Header, Nav, Footer) */
+        :root {
+            --primary-color: #004c99; 
+            --secondary-color: #ffc425; 
+            --background-color: #f8f9fa; 
+            --card-background: #ffffff;
+            --live-color: #cc0000;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: #343a40;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.2em;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--secondary-color);
+        }
+        
+        nav {
+            background-color: var(--card-background);
+            border-bottom: 3px solid var(--secondary-color);
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: white;
+            background-color: var(--primary-color);
+        }
+
+        /* Container Principal */
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            padding-bottom: 5px;
+            border-bottom: 3px solid var(--secondary-color);
+            font-weight: 700;
+        }
+
+        /* Estilos da Listagem de Times */
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .team-card {
+            background-color: var(--card-background);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        /* NOVO ESTILO PARA O CONTÊINER DA LOGO */
+        .team-logo {
+            margin-bottom: 10px;
+        }
+        
+        /* ESTILO PARA A IMAGEM DA LOGO */
+        .team-logo img {
+            width: 65px; 
+            height: 65px;
+            object-fit: contain;
+        }
+
+        .team-card h3 {
+            color: var(--primary-color);
+            font-size: 1.5em;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .team-info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+            text-align: left;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 15px;
+        }
+
+        .team-info-list li {
+            font-size: 0.95em;
+            padding: 5px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .team-info-list span {
+            color: #6c757d;
+        }
+        
+        .details-button {
+            display: block;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 700;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .details-button:hover {
+            background-color: #ffd65c;
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            font-size: 0.9em;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>LIGA MASTER DE FUTEBOL 🏆</h1>
+        <p>Acompanhamento Oficial de Resultados, Agenda e Estatísticas</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="classificacao.html">Classificação</a></li>
+            <li><a href="proximas-rodadas.html">Próximas rodadas</a></li>
+            <li><a href="artilharia.html">Artilharia</a></li>
+            <li><a href="times.html" class="active">Times</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        
+        <h2>👥 Clubes Participantes da Liga Master</h2>
+        
+        <section class="teams-grid">
+            
+            <div class="team-card">
+                <div class="team-logo">
+                    <img src="https://imgs.search.brave.com/4lxq5Xyoy4eJU-VsrqhLPvC1fysbkxIvItBEC2RI1GE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc2Vla2xvZ28u/Y29tL2xvZ28tcG5n/LzMvMi9jbHViZS1k/ZS1yZWdhdGFzLWRv/LWZsYW1lbmdvLWxv/Z28tcG5nX3NlZWts/b2dvLTMyNDEzLnBu/Zw" alt="Logo do Flamengo">
+                </div>
+                <h3>Flamengo</h3>
+                <ul class="team-info-list">
+                    <li><span>Fundação:</span> <strong>1895</strong></li>
+                    <li><span>Técnico:</span> <strong>M. Silva</strong></li>
+                    <li><span>Títulos na Liga:</span> <strong>3</strong></li>
+                    <li><span>Posição Atual:</span> <strong>1º</strong></li>
+                </ul>
+                <a href="time-detalhe-flamengo.html" class="details-button">Ver Elenco e Detalhes</a>
+            </div>
+
+            <div class="team-card">
+                <div class="team-logo">
+                    <img src="https://imgs.search.brave.com/YFA6d42eGKfy_5eCUo29P7jregIrsl0M2Vu2kvfMECQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc2Vla2xvZ28u/Y29tL2xvZ28tcG5n/LzEwLzIvcGFsbWVp/cmFzLWxvZ28tcG5n/X3NlZWtsb2dvLTEw/NTU1MS5wbmc" alt="Logo do Palmeiras">
+                </div>
+                <h3>Palmeiras</h3>
+                <ul class="team-info-list">
+                    <li><span>Fundação:</span> <strong>1914</strong></li>
+                    <li><span>Técnico:</span> <strong>R. Ferreira</strong></li>
+                    <li><span>Títulos na Liga:</span> <strong>4</strong></li>
+                    <li><span>Posição Atual:</span> <strong>2º</strong></li>
+                </ul>
+                <a href="time-detalhe-palmeiras.html" class="details-button">Ver Elenco e Detalhes</a>
+            </div>
+            
+            <div class="team-card">
+                <div class="team-logo">
+                    <img src="https://imgs.search.brave.com/06qa3jL0ZDM7ef25rpBkFsy7mA27PT1dzBOdTPD1p8c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9sb2dv/ZGV0aW1lcy5jb20v/dGltZXMvY29yaW50/aGlhbnMvbG9nby1k/by1jb3JpbnRoaWFu/cy0yMDQ4LnBuZw" alt="Logo do Corinthians">
+                </div>
+                <h3>Corinthians</h3>
+                <ul class="team-info-list">
+                    <li><span>Fundação:</span> <strong>1910</strong></li>
+                    <li><span>Técnico:</span> <strong>C. Oliveira</strong></li>
+                    <li><span>Títulos na Liga:</span> <strong>2</strong></li>
+                    <li><span>Posição Atual:</span> <strong>4º</strong></li>
+                </ul>
+                <a href="time-detalhe-corinthians.html" class="details-button">Ver Elenco e Detalhes</a>
+            </div>
+            
+            <div class="team-card">
+                <div class="team-logo">
+                    <img src="https://imgs.search.brave.com/AeKAXyN3iKkpzMBGIZ_ZJJYY-dv8FPpFNj-ZzdGAcO8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2EwLzM2/LzFiL2EwMzYxYjgw/ZmExY2NiNWE1Nzkz/ZTBlNmRkZWIyYmQ5/LmpwZw" alt="Logo do Vasco da Gama">
+                </div>
+                <h3>Vasco da Gama</h3>
+                <ul class="team-info-list">
+                    <li><span>Fundação:</span> <strong>1898</strong></li>
+                    <li><span>Técnico:</span> <strong>L. Castro</strong></li>
+                    <li><span>Títulos na Liga:</span> <strong>1</strong></li>
+                    <li><span>Posição Atual:</span> <strong>12º</strong></li>
+                </ul>
+                <a href="time-detalhe-vasco.html" class="details-button">Ver Elenco e Detalhes</a>
+            </div>
+
+            <div class="team-card">
+                <div class="team-logo">
+                    <img src="https://imgs.search.brave.com/juRpRmXuX1TqeF1jZ74yonaHCWqv6jriC2rp_54H5XA/rs:fit:860:0:0:0/g:ce/aHR0cDovL2FtYWRv/ci5lZHUuZG8vd3At/Y29udGVudC91cGxv/YWRzLzIwMTYvMDIv/TG9nby1Db2xlZ2lv/LUFtYWRvci0yMDh4/MzAwLmpwZw" alt="Logo do Vasco da Gama">
+                </div>
+                <h3>Bananeiros</h3>
+                <ul class="team-info-list">
+                    <li><span>Fundação:</span> <strong>1898</strong></li>
+                    <li><span>Técnico:</span> <strong>L. Castro</strong></li>
+                    <li><span>Títulos na Liga:</span> <strong>1</strong></li>
+                    <li><span>Posição Atual:</span> <strong>12º</strong></li>
+                </ul>
+                <a href="time-detalhe-bananeiros.html" class="details-button">Ver Elenco e Detalhes</a>
+            </div>
+            
+            <div class="team-card">
+                <div class="team-logo">
+                    <img src="https://imgs.search.brave.com/BNXWnMu8wI8DI4ZLBWfWonrQAeDCtoULQu1yiq1C08U/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy8y/LzIyL1NhbnRvc19G/Q18xOTEyLnBuZw" alt="Logo do Vasco da Gama">
+                </div>
+                <h3>Santos FC</h3>
+                <ul class="team-info-list">
+                    <li><span>Fundação:</span> <strong>1898</strong></li>
+                    <li><span>Técnico:</span> <strong>L. Castro</strong></li>
+                    <li><span>Títulos na Liga:</span> <strong>1</strong></li>
+                    <li><span>Posição Atual:</span> <strong>12º</strong></li>
+                </ul>
+                <a href="time-detalhe-santosfc.html" class="details-button">Ver Elenco e Detalhes</a>
+            </div>
+
+        </section>
+
+    </div>
+
+    <footer>
+        <p>Liga Master de Futebol | Plataforma Oficial de Estatísticas | Copyright © 2025</p>
+    </footer>
+
+</body>
+</html>

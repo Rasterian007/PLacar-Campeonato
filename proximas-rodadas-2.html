@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📅 Próximas Rodadas | Liga Master de Futebol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* CSS REPLICADO DO INDEX.HTML (Seu estilo original) */
+        :root {
+            --primary-color: #004c99; 
+            --secondary-color: #ffc425; 
+            --background-color: #f8f9fa; 
+            --card-background: #ffffff;
+            --live-color: #cc0000;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: #343a40;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.2em;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--secondary-color);
+        }
+        
+        nav {
+            background-color: var(--card-background);
+            border-bottom: 3px solid var(--secondary-color);
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: white;
+            background-color: var(--primary-color);
+        }
+
+        /* Container e estilos de jogo */
+        .container {
+            width: 95%;
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            padding-bottom: 5px;
+            border-bottom: 3px solid var(--secondary-color);
+            font-weight: 700;
+        }
+
+        .match-card {
+            background-color: var(--card-background);
+            border: 1px solid #dee2e6;
+            border-left: 5px solid #ccc;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 15px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .match-card:hover {
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .team-info {
+            width: 40%;
+            text-align: center;
+        }
+        
+        .team-info h3 {
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .score-box {
+            width: 20%;
+            text-align: center;
+            font-weight: 900;
+            color: var(--primary-color);
+        }
+
+        .match-meta {
+            text-align: right;
+            width: 20%;
+            font-size: 0.9em;
+            color: #6c757d;
+            font-weight: 700;
+        }
+
+        .match-meta .location {
+            display: block;
+            font-size: 0.8em;
+            color: #999;
+            font-weight: 400;
+        }
+        
+        .round-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px;
+            border-radius: 6px 6px 0 0;
+            margin-bottom: 0;
+            margin-top: 30px;
+            font-weight: 700;
+            font-size: 1.3em;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Botão de Navegação entre Rodadas */
+        .round-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            padding: 10px 0;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .round-navigation a {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 700;
+            transition: opacity 0.3s;
+        }
+
+        .round-navigation a:hover {
+            opacity: 0.9;
+        }
+
+        .round-navigation a.disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            font-size: 0.9em;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>LIGA MASTER DE FUTEBOL 🏆</h1>
+        <p>Acompanhamento Oficial de Resultados, Agenda e Estatísticas</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="classificacao.html">Classificação</a></li>
+            <li><a href="proximas-rodadas.html" class="active">Próximas rodadas</a></li>
+            <li><a href="artilharia.html">Artilharia</a></li>
+            <li><a href="times.html">Times</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        
+        <h2>📅 Agenda Completa de Jogos</h2>
+        
+        <div class="round-navigation">
+    <a href="proximas-rodadas.html">← Rodada Anterior (1)</a>
+    <a href="#" class="disabled">Próximas Rodadas (3) →</a> 
+</div>
+        
+        <div class="round-header">RODADA 16 | 04 a 05 de Dezembro</div>
+        
+        <div class="match-card">
+            <div class="team-info">
+                <h3>Santos</h3>
+            </div>
+            <div class="score-box">VS</div>
+            <div class="team-info">
+                <h3>Corinthians</h3>
+            </div>
+            <div class="match-meta">
+                04/Dez (Qua) - 21:30 BRT
+                <span class="location">Arena SP</span>
+            </div>
+        </div>
+
+        <div class="match-card">
+            <div class="team-info">
+                <h3>Atlético FC</h3>
+            </div>
+            <div class="score-box">VS</div>
+            <div class="team-info">
+                <h3>São Paulo</h3>
+            </div>
+            <div class="match-meta">
+                04/Dez (Qua) - 19:00 BRT
+                <span class="location">Estádio Mineirão</span>
+            </div>
+        </div>
+
+        <div class="match-card">
+            <div class="team-info">
+                <h3>Flamengo</h3>
+            </div>
+            <div class="score-box">VS</div>
+            <div class="team-info">
+                <h3>Vasco da Gama</h3>
+            </div>
+            <div class="match-meta">
+                05/Dez (Qui) - 19:00 BRT
+                <span class="location">Maracanã</span>
+            </div>
+        </div>
+        
+        <div class="match-card">
+            <div class="team-info">
+                <h3>Fluminense</h3>
+            </div>
+            <div class="score-box">VS</div>
+            <div class="team-info">
+                <h3>Grêmio</h3>
+            </div>
+            <div class="match-meta">
+                05/Dez (Qui) - 21:30 BRT
+                <span class="location">Engenhão</span>
+            </div>
+        </div>
+        
+        </div>
+
+    <footer>
+        <p>Liga Master de Futebol | Plataforma Oficial de Estatísticas | Agenda Sujeita a Alterações</p>
+    </footer>
+
+</body>
+</html>

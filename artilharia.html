@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚽ Artilharia Oficial | Liga Master de Futebol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Variáveis CSS para cores */
+        :root {
+            --primary-color: #004c99; /* Azul Profundo */
+            --secondary-color: #ffc425; /* Amarelo/Dourado (Destaque) */
+            --background-color: #f8f9fa; 
+            --card-background: #ffffff;
+            --live-color: #cc0000; /* Vermelho para Destaque */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: #343a40;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.2em;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--secondary-color);
+        }
+        
+        nav {
+            background-color: var(--card-background);
+            border-bottom: 3px solid var(--secondary-color);
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: white;
+            background-color: var(--primary-color);
+        }
+
+        /* Container ajustado para Artilharia */
+        .container {
+            width: 95%;
+            max-width: 900px; 
+            margin: 30px auto;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            padding-bottom: 5px;
+            border-bottom: 3px solid var(--secondary-color);
+            font-weight: 700;
+        }
+
+        /* ESTILOS ESPECÍFICOS PARA A TABELA DE ARTILHARIA */
+        
+        .leading-scorer-card {
+            background: linear-gradient(135deg, var(--primary-color), #0066cc);
+            color: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+        }
+        
+        .scorer-photo-large {
+            width: 100px;
+            height: 100px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            margin-right: 25px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: 900;
+            color: var(--primary-color);
+            border: 4px solid white;
+            overflow: hidden; 
+        }
+
+        .scorer-photo-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* Nova classe para o placeholder da foto grande */
+        .scorer-photo-large .placeholder-text {
+            font-size: 1.5em;
+            font-weight: 900;
+            color: var(--primary-color);
+        }
+
+        .scorer-details h3 {
+            margin: 0 0 5px 0;
+            font-size: 2.2em;
+            font-weight: 900;
+            color: var(--secondary-color);
+            line-height: 1.1;
+        }
+        
+        .scorer-details p {
+            margin: 0;
+            font-size: 1.1em;
+        }
+
+        .scorer-details .goals-count {
+            font-size: 2.5em;
+            font-weight: 900;
+            color: var(--live-color);
+        }
+
+        /* Tabela de Classificação de Gols */
+        .artilharia-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 1em;
+            background-color: var(--card-background);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .artilharia-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 700;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .artilharia-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+
+        .artilharia-table tr:nth-child(even) {
+            background-color: #f7f7f7;
+        }
+        
+        .artilharia-table tr:hover {
+            background-color: #e9ecef;
+        }
+        
+        .player-photo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin-right: 15px;
+            flex-shrink: 0;
+            overflow: hidden;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        .player-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .player-name {
+            font-weight: 700;
+            color: var(--primary-color);
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .team-abbr {
+            font-size: 0.9em;
+            color: #6c757d;
+            font-weight: 400;
+            margin-left: 10px;
+        }
+        
+        .col-pos {
+            font-weight: 900;
+            color: var(--secondary-color);
+            text-align: center;
+        }
+
+        .col-gols {
+            font-size: 1.4em;
+            font-weight: 900;
+            color: var(--live-color);
+            text-align: center;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            font-size: 0.9em;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>LIGA MASTER DE FUTEBOL 🏆</h1>
+        <p>Acompanhamento Oficial de Resultados, Agenda e Estatísticas</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="classificacao.html">Classificação</a></li>
+            <li><a href="proximas-rodadas.html">Próximas rodadas</a></li>
+            <li><a href="artilharia.html" class="active">Artilharia</a></li>
+            <li><a href="times.html">Times</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        
+        <h2>👑 Artilheiro Destaque da Temporada</h2>
+        
+        <div class="leading-scorer-card">
+            <div id="leader-photo-large" class="scorer-photo-large">
+                <span class="placeholder-text">...</span> 
+            </div>
+            <div class="scorer-details">
+                <h3 id="leader-name">...</h3>
+                <p id="leader-team-position">...</p>
+                <div style="margin-top: 10px;">
+                    <span style="font-size: 1.5em; font-weight: 700;">TOTAL DE GOLS: </span>
+                    <span id="leader-goals-count" class="goals-count">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <h2>⚽ Ranking Completo de Gols</h2>
+        
+        <div style="overflow-x: auto;">
+            <table class="artilharia-table" id="artilharia-table">
+                <thead>
+                    <tr>
+                        <th style="width: 5%;" class="col-pos">#</th>
+                        <th style="width: 65%;">Jogador e Time</th>
+                        <th style="width: 15%;">Assistências</th>
+                        <th style="width: 15%;" class="col-gols">Gols</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-full-team="Flamengo FC" data-position="Atacante" data-photo-url="https://via.placeholder.com/100/1e90ff/ffffff?text=JS">
+                        <td class="col-pos">1</td>
+                        <td>
+                            <div class="player-photo">
+                                <img src="https://via.placeholder.com/50/1e90ff/ffffff?text=JS" alt="Foto de J. Silva">
+                            </div>
+                            <span class="player-name">Júlio Silva</span>
+                            <span class="team-abbr">(FLA)</span>
+                        </td>
+                        <td style="text-align: center; font-weight: 700;">5</td>
+                        <td class="col-gols">19</td>
+                    </tr>
+                    
+                    <tr data-full-team="Palmeiras" data-position="Meio-Campo" data-photo-url="https://via.placeholder.com/100/006400/ffffff?text=RC">
+                        <td class="col-pos">2</td>
+                        <td>
+                            <div class="player-photo">
+                                <img src="https://via.placeholder.com/50/006400/ffffff?text=RC" alt="Foto de R. Costa">
+                            </div>
+                            <span class="player-name">Roberto Costa</span>
+                            <span class="team-abbr">(PAL)</span>
+                        </td>
+                        <td style="text-align: center; font-weight: 700;">8</td>
+                        <td class="col-gols">16</td>
+                    </tr>
+                    
+                    <tr data-full-team="Corinthians" data-position="Atacante" data-photo-url="https://via.placeholder.com/100/000000/ffffff?text=MA">
+                        <td class="col-pos">3</td>
+                        <td>
+                            <div class="player-photo">
+                                <img src="https://via.placeholder.com/50/000000/ffffff?text=MA" alt="Foto de M. Almeida">
+                            </div>
+                            <span class="player-name">Marcos Almeida</span>
+                            <span class="team-abbr">(COR)</span>
+                        </td>
+                        <td style="text-align: center; font-weight: 700;">3</td>
+                        <td class="col-gols">15</td>
+                    </tr>
+                    
+                    <tr data-full-team="São Paulo" data-position="Meio-Campo" data-photo-url="https://via.placeholder.com/100/ff0000/ffffff?text=LM">
+                        <td class="col-pos">4</td>
+                        <td>
+                            <div class="player-photo">
+                                <img src="https://via.placeholder.com/50/ff0000/ffffff?text=LM" alt="Foto de L. Moura">
+                            </div>
+                            <span class="player-name">Lucas Moura</span>
+                            <span class="team-abbr">(SAO)</span>
+                        </td>
+                        <td style="text-align: center; font-weight: 700;">10</td>
+                        <td class="col-gols">14</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        
+        <p style="text-align: right; margin-top: 15px; font-size: 0.9em; color: #6c757d;">
+            *Em caso de empate no número de gols, o jogador com mais assistências é classificado na frente.
+        </p>
+        
+    </div>
+
+    <footer>
+        <p>Liga Master de Futebol | Plataforma Oficial de Estatísticas | Artilharia Atualizada.</p>
+    </footer>
+
+    <script>
+        function updateLeadingScorer() {
+            // 1. Encontra a tabela de artilharia e a primeira linha (que deve ser o líder)
+            const table = document.getElementById('artilharia-table');
+            const leaderRow = table.querySelector('tbody tr:first-child');
+
+            if (!leaderRow) {
+                // Se não houver jogadores na tabela, saia
+                console.log("Nenhum jogador encontrado para destaque.");
+                return;
+            }
+
+            // 2. Extrai dados da primeira linha
+            // Coluna 2 (Jogador e Time)
+            const playerNameElement = leaderRow.querySelector('.player-name');
+            const teamAbbrElement = leaderRow.querySelector('.team-abbr');
+
+            // Coluna 4 (Gols)
+            const goalsElement = leaderRow.querySelector('.col-gols');
+
+            // Atributos personalizados da linha (dados que não aparecem na célula)
+            const fullTeam = leaderRow.getAttribute('data-full-team'); 
+            const position = leaderRow.getAttribute('data-position');
+            const photoUrl = leaderRow.getAttribute('data-photo-url');
+            
+            // 3. Obtém os elementos de destaque
+            const leaderNameH3 = document.getElementById('leader-name');
+            const leaderTeamP = document.getElementById('leader-team-position');
+            const leaderGoalsSpan = document.getElementById('leader-goals-count');
+            const leaderPhotoDiv = document.getElementById('leader-photo-large');
+
+            // 4. Preenche os dados no cartão de destaque
+            if (playerNameElement) {
+                // Nome em maiúsculas para o destaque
+                leaderNameH3.textContent = playerNameElement.textContent.toUpperCase();
+            }
+
+            // Constrói a linha de time e posição
+            leaderTeamP.textContent = `${fullTeam || 'Time não especificado'} | Posição: ${position || 'N/A'}`;
+
+            // Preenche a contagem de gols
+            if (goalsElement) {
+                leaderGoalsSpan.textContent = goalsElement.textContent;
+            }
+            
+            // 5. Atualiza a foto de destaque
+            leaderPhotoDiv.innerHTML = ''; // Limpa o placeholder
+            if (photoUrl && !photoUrl.includes('placeholder')) {
+                // Se for uma URL real e não um placeholder
+                const img = document.createElement('img');
+                img.src = photoUrl;
+                img.alt = `Foto de ${leaderNameH3.textContent}`;
+                leaderPhotoDiv.appendChild(img);
+            } else if (playerNameElement) {
+                // Caso a URL da foto não esteja disponível (ou seja um placeholder), usa as iniciais
+                const nameParts = playerNameElement.textContent.split(' ');
+                let initials = nameParts.length > 1 
+                               ? `${nameParts[0][0]}${nameParts[nameParts.length - 1][0]}` 
+                               : nameParts[0][0];
+                initials = initials.toUpperCase();
+                leaderPhotoDiv.innerHTML = `<span class="placeholder-text">${initials}</span>`;
+            } else {
+                 leaderPhotoDiv.innerHTML = `<span class="placeholder-text">N/A</span>`;
+            }
+        }
+
+        // Chama a função assim que o conteúdo da página estiver carregado
+        document.addEventListener('DOMContentLoaded', updateLeadingScorer);
+    </script>
+
+</body>
+</html>

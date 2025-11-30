@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏆 Liga Master de Futebol - Agenda e Estatísticas Oficiais</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Variáveis CSS para Cores Institucionais */
+        :root {
+            --primary-color: #004c99; /* Azul Profundo */
+            --secondary-color: #ffc425; /* Amarelo/Dourado (Destaque) */
+            --background-color: #f8f9fa; 
+            --card-background: #ffffff;
+            --live-color: #cc0000; /* Vermelho para Ao Vivo */
+        }
+
+        /* Estilos Globais */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: #343a40;
+            line-height: 1.6;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.2em;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--secondary-color);
+        }
+        
+        /* Navegação Principal */
+        nav {
+            background-color: var(--card-background);
+            border-bottom: 3px solid var(--secondary-color);
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: white;
+            background-color: var(--primary-color);
+        }
+
+        /* Layout Principal com Grid Avançado */
+        .container {
+            width: 95%;
+            max-width: 1300px;
+            margin: 30px auto;
+            /* Grid principal de 3 colunas, sendo a do meio maior */
+            display: grid;
+            grid-template-columns: 1.5fr 3fr 1.5fr; 
+            gap: 30px;
+        }
+        
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 2fr 1fr; /* Central e Lateral em tablets */
+            }
+            .sidebar-left { display: none; } /* Oculta barra lateral menor em tablets */
+        }
+
+        @media (max-width: 850px) {
+            .container {
+                grid-template-columns: 1fr; /* Coluna única em smartphones */
+            }
+            .sidebar-left { display: none; } 
+        }
+
+        /* Títulos de Seção */
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            padding-bottom: 5px;
+            border-bottom: 3px solid var(--secondary-color);
+            font-weight: 700;
+        }
+
+        /* Estilo dos Cartões de Jogo */
+        .match-card {
+            background-color: var(--card-background);
+            border: 1px solid #dee2e6;
+            border-left: 5px solid transparent;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 15px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .match-card.live {
+            border-left-color: var(--live-color);
+            background-color: #fff8f8;
+        }
+
+        .team-info {
+            width: 40%;
+            text-align: center;
+        }
+        
+        .team-info h3 {
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .score-box {
+            width: 20%;
+            text-align: center;
+            font-weight: 900;
+            color: var(--primary-color);
+        }
+
+        .score-box .score {
+            font-size: 3em;
+            line-height: 1;
+        }
+        
+        .match-meta {
+            text-align: right;
+            width: 20%;
+            font-size: 0.85em;
+            color: #6c757d;
+        }
+        
+        /* Estilo da Tabela e Estatísticas (Lateral) */
+        .sidebar-card {
+            background-color: var(--card-background);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        
+        .stats-table th, .stats-table td {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+
+        .stats-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding-left: 10px;
+            font-weight: 600;
+        }
+        
+        .stats-table td:last-child {
+            text-align: right;
+            font-weight: 700;
+            color: var(--live-color);
+        }
+        
+        /* Próximas Rodadas (Central) */
+        .round-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px;
+            border-radius: 6px 6px 0 0;
+            margin-bottom: -15px;
+            font-weight: 700;
+            font-size: 1.1em;
+            text-align: center;
+        }
+        
+        /* Notícias Destaque (Lateral Esquerda) */
+        .news-item {
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+        }
+        .news-item h4 {
+            margin: 0 0 5px 0;
+            font-size: 1em;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            font-size: 0.9em;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>LIGA MASTER DE FUTEBOL 🏆</h1>
+        <p>Acompanhamento Oficial de Resultados, Agenda e Estatísticas</p>
+    </header>
+
+    <nav>
+    <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="classificacao.html">Classificação</a></li>
+        <li><a href="proximas-rodadas.html">Próximas rodadas</a></li>
+        <li><a href="artilharia.html">Artilharia</a></li>
+        <li><a href="times.html">Times</a></li>
+    </ul>
+</nav>
+    
+    <div class="container">
+        
+        <aside class="sidebar-left">
+            <div class="sidebar-card">
+                <h2>📰 Notícias Rápidas</h2>
+                
+                <div class="news-item">
+                    <h4>Mercado: Contrato de Estrela Renovado!</h4>
+                    <p style="font-size: 0.85em;">Clube A garante permanência do craque até 2029.</p>
+                </div>
+                
+                <div class="news-item">
+                    <h4>Lesão: Zagueiro Fora Por 3 Semanas</h4>
+                    <p style="font-size: 0.85em;">Resultado de exame confirma estiramento muscular.</p>
+                </div>
+                
+                <div style="text-align: right; margin-top: 10px;">
+                    <a href="#" style="color: var(--primary-color); font-size: 0.9em; text-decoration: none;">Ver Todas →</a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; background-color: #e9ecef; padding: 15px; border-radius: 8px; font-size: 0.9em; color: #6c757d;">
+                [Publicidade / Patrocinador Principal]
+            </div>
+        </aside>
+
+        <section class="main-content">
+            
+            <h2>🔥 Destaque da Rodada Atual</h2>
+            <div class="match-card live" style="padding: 30px; border-width: 6px;">
+                <div class="team-info">
+                    <h3>Atlético FC</h3>
+                </div>
+                
+                <div class="score-box">
+                    <span class="score">2 - 0</span>
+                </div>
+                
+                <div class="team-info">
+                    <h3>Sporting BA</h3>
+                </div>
+                
+                <div class="match-meta" style="width: 20%; text-align: center;">
+                    AO VIVO
+                    <span class="time" style="font-size: 1.2em;">Intervalo (45')</span>
+                </div>
+            </div>
+            
+            <h2 style="margin-top: 40px;">📅 Próximas Rodadas (Agenda Detalhada)</h2>
+            
+            <div class="round-header">PRÓXIMA RODADA: 16 (04/Dezembro)</div>
+            <div class="match-card">
+                <div class="team-info">
+                    <h3>Palmeiras</h3>
+                </div>
+                <div class="score-box">VS</div>
+                <div class="team-info">
+                    <h3>Corinthians</h3>
+                </div>
+                <div class="match-meta">
+                    <span class="time">04/Dez</span>
+                    <span>21:30 | Arena SP</span>
+                </div>
+            </div>
+
+            <div class="match-card">
+                <div class="team-info">
+                    <h3>Flamengo</h3>
+                </div>
+                <div class="score-box">VS</div>
+                <div class="team-info">
+                    <h3>Vasco da Gama</h3>
+                </div>
+                <div class="match-meta">
+                    <span class="time">05/Dez</span>
+                    <span>19:00 | Maracanã</span>
+                </div>
+            </div>
+            
+            <div class="round-header" style="margin-top: 30px;">PRÓXIMA RODADA: 17 (11/Dezembro)</div>
+            <div class="match-card">
+                <div class="team-info">
+                    <h3>São Paulo</h3>
+                </div>
+                <div class="score-box">VS</div>
+                <div class="team-info">
+                    <h3>Fluminense</h3>
+                </div>
+                <div class="match-meta">
+                    <span class="time">11/Dez</span>
+                    <span>20:00 | Morumbi</span>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 25px;">
+                <a href="#" style="color: var(--primary-color); font-weight: 700; text-decoration: none; font-size: 1.1em;">Ver Agenda Completa →</a>
+            </div>
+            
+        </section>
+
+        <aside class="sidebar-right">
+            
+            <div class="sidebar-card">
+                <h2>📊 Classificação (Top 5)</h2>
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">Pos</th>
+                            <th style="width: 60%;">Time</th>
+                            <th style="width: 35%;">Pts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>Flamengo</td><td>68</td></tr>
+                        <tr><td>2</td><td>Palmeiras</td><td>66</td></tr>
+                        <tr><td>3</td><td>Atlético FC</td><td>63</td></tr>
+                        <tr><td>4</td><td>Corinthians</td><td>60</td></tr>
+                        <tr><td>5</td><td>São Paulo</td><td>58</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="sidebar-card">
+                <h2>⚽ Artilharia (Gols)</h2>
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">Pos</th>
+                            <th style="width: 60%;">Jogador</th>
+                            <th style="width: 35%;">Gols</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>J. Silva (FLA)</td><td>19</td></tr>
+                        <tr><td>2</td><td>R. Costa (PAL)</td><td>16</td></tr>
+                        <tr><td>3</td><td>M. Almeida (COR)</td><td>15</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </aside>
+
+    </div>
+
+    <footer>
+        <p>Liga Master de Futebol | Plataforma Oficial de Estatísticas | Copyright © 2025</p>
+    </footer>
+
+</body>
+</html>

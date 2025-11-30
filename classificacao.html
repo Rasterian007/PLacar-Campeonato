@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Classificação Oficial | Liga Master de Futebol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* CSS REPLICADO DO INDEX.HTML */
+        :root {
+            --primary-color: #004c99; /* Azul Profundo */
+            --secondary-color: #ffc425; /* Amarelo/Dourado (Destaque) */
+            --background-color: #f8f9fa; 
+            --card-background: #ffffff;
+            --live-color: #cc0000; /* Vermelho para Ao Vivo */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: #343a40;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.2em;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--secondary-color);
+        }
+        
+        nav {
+            background-color: var(--card-background);
+            border-bottom: 3px solid var(--secondary-color);
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: white;
+            background-color: var(--primary-color);
+        }
+
+        /* Container ajustado para tabelas largas */
+        .container {
+            width: 98%; /* Levemente mais largo para a tabela */
+            max-width: 1400px;
+            margin: 30px auto;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            padding-bottom: 5px;
+            border-bottom: 3px solid var(--secondary-color);
+            font-weight: 700;
+        }
+
+        /* ESTILOS ESPECÍFICOS PARA A TABELA DE CLASSIFICAÇÃO */
+        
+        .classification-wrapper {
+            /* Permite rolagem horizontal em telas pequenas */
+            overflow-x: auto;
+            background-color: var(--card-background);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .classification-table {
+            width: 100%;
+            min-width: 900px; /* Garante que a tabela tenha largura mínima para caber todos os dados */
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.9em;
+        }
+
+        .classification-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 700;
+            padding: 12px 8px;
+            text-align: center;
+            position: sticky; /* Mantém o cabeçalho fixo na rolagem horizontal */
+            top: 0; 
+        }
+
+        .classification-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .classification-table tr:nth-child(even) {
+            background-color: #f4f4f4;
+        }
+        
+        .classification-table tr:hover {
+            background-color: #e9ecef;
+        }
+
+        /* Coluna POS e Pts (Destaque) */
+        .classification-table .col-pos {
+            font-weight: 900;
+            width: 5%;
+        }
+        .classification-table .col-pts {
+            font-weight: 900;
+            color: var(--live-color); /* Pontos em destaque vermelho */
+            width: 6%;
+        }
+
+        /* Coluna Time (Alinhamento Esquerda) */
+        .classification-table .col-team {
+            text-align: left;
+            font-weight: 700;
+            color: var(--primary-color);
+            width: 25%;
+        }
+
+        /* Cores de Zona de Classificação (simulação) */
+        .zone-libertadores { border-left: 5px solid #2ecc71; } /* Verde para topo */
+        .zone-sula { border-left: 5px solid #3498db; } /* Azul para meio */
+        .zone-rebaixamento { border-left: 5px solid var(--live-color); } /* Vermelho para baixo */
+
+        /* Legenda das Colunas */
+        .key-stats {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #6c757d;
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            font-size: 0.9em;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>LIGA MASTER DE FUTEBOL 🏆</h1>
+        <p>Acompanhamento Oficial de Resultados, Agenda e Estatísticas</p>
+    </header>
+
+    <nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="classificacao.html" class="active">Classificação</a></li>
+        <li><a href="proximas-rodadas.html">Próximas rodadas</a></li>
+        <li><a href="artilharia.html">Artilharia</a></li>
+        <li><a href="times.html">Times</a></li>
+    </ul>
+</nav>
+    
+    <div class="container">
+        
+        <h2>📊 Tabela de Classificação - Temporada 2025/2026</h2>
+        
+        <div class="classification-wrapper">
+            <table class="classification-table">
+                <thead>
+                    <tr>
+                        <th class="col-pos">#</th>
+                        <th class="col-team">Time</th>
+                        <th>J</th>
+                        <th class="col-pts">Pts</th>
+                        <th>V</th>
+                        <th>E</th>
+                        <th>D</th>
+                        <th>GP</th>
+                        <th>GC</th>
+                        <th>SG</th>
+                        <th>%</th>
+                        <th>Últimos 5</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="zone-libertadores">
+                        <td class="col-pos">1</td>
+                        <td class="col-team">Flamengo</td>
+                        <td>30</td>
+                        <td class="col-pts">68</td>
+                        <td>21</td>
+                        <td>5</td>
+                        <td>4</td>
+                        <td>65</td>
+                        <td>20</td>
+                        <td>+45</td>
+                        <td>75.6</td>
+                        <td>V V V D E</td>
+                    </tr>
+                    
+                    <tr class="zone-libertadores">
+                        <td class="col-pos">2</td>
+                        <td class="col-team">Palmeiras</td>
+                        <td>30</td>
+                        <td class="col-pts">66</td>
+                        <td>20</td>
+                        <td>6</td>
+                        <td>4</td>
+                        <td>58</td>
+                        <td>22</td>
+                        <td>+36</td>
+                        <td>73.3</td>
+                        <td>V V D V V</td>
+                    </tr>
+                    
+                    <tr class="zone-libertadores">
+                        <td class="col-pos">3</td>
+                        <td class="col-team">Atlético FC</td>
+                        <td>30</td>
+                        <td class="col-pts">63</td>
+                        <td>19</td>
+                        <td>6</td>
+                        <td>5</td>
+                        <td>55</td>
+                        <td>25</td>
+                        <td>+30</td>
+                        <td>70.0</td>
+                        <td>E V V V E</td>
+                    </tr>
+
+                    <tr class="zone-sula">
+                        <td class="col-pos">4</td>
+                        <td class="col-team">Corinthians</td>
+                        <td>30</td>
+                        <td class="col-pts">60</td>
+                        <td>18</td>
+                        <td>6</td>
+                        <td>6</td>
+                        <td>48</td>
+                        <td>28</td>
+                        <td>+20</td>
+                        <td>66.7</td>
+                        <td>V E D V V</td>
+                    </tr>
+
+                    <tr class="zone-sula">
+                        <td class="col-pos">5</td>
+                        <td class="col-team">São Paulo</td>
+                        <td>30</td>
+                        <td class="col-pts">58</td>
+                        <td>17</td>
+                        <td>7</td>
+                        <td>6</td>
+                        <td>45</td>
+                        <td>27</td>
+                        <td>+18</td>
+                        <td>64.4</td>
+                        <td>D V V E V</td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-pos">6</td>
+                        <td class="col-team">Fluminense</td>
+                        <td>30</td>
+                        <td class="col-pts">45</td>
+                        <td>12</td>
+                        <td>9</td>
+                        <td>9</td>
+                        <td>40</td>
+                        <td>35</td>
+                        <td>+5</td>
+                        <td>50.0</td>
+                        <td>V E D E V</td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="col-pos">7</td>
+                        <td class="col-team">Grêmio</td>
+                        <td>30</td>
+                        <td class="col-pts">42</td>
+                        <td>10</td>
+                        <td>12</td>
+                        <td>8</td>
+                        <td>38</td>
+                        <td>32</td>
+                        <td>+6</td>
+                        <td>46.7</td>
+                        <td>E E D V D</td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-pos">15</td>
+                        <td class="col-team">Vasco da Gama</td>
+                        <td>30</td>
+                        <td class="col-pts">30</td>
+                        <td>7</td>
+                        <td>9</td>
+                        <td>14</td>
+                        <td>30</td>
+                        <td>42</td>
+                        <td>-12</td>
+                        <td>33.3</td>
+                        <td>D E V D D</td>
+                    </tr>
+                    
+                    <tr class="zone-rebaixamento">
+                        <td class="col-pos">16</td>
+                        <td class="col-team">Sporting BA</td>
+                        <td>30</td>
+                        <td class="col-pts">28</td>
+                        <td>6</td>
+                        <td>10</td>
+                        <td>14</td>
+                        <td>28</td>
+                        <td>45</td>
+                        <td>-17</td>
+                        <td>31.1</td>
+                        <td>D D V E D</td>
+                    </tr>
+
+                    <tr class="zone-rebaixamento">
+                        <td class="col-pos">17</td>
+                        <td class="col-team">Cruzeiro FC</td>
+                        <td>30</td>
+                        <td class="col-pts">25</td>
+                        <td>5</td>
+                        <td>10</td>
+                        <td>15</td>
+                        <td>25</td>
+                        <td>50</td>
+                        <td>-25</td>
+                        <td>27.8</td>
+                        <td>E D D D E</td>
+                    </tr>
+
+                    <tr class="zone-rebaixamento">
+                        <td class="col-pos">18</td>
+                        <td class="col-team">Recife SC</td>
+                        <td>30</td>
+                        <td class="col-pts">22</td>
+                        <td>5</td>
+                        <td>7</td>
+                        <td>18</td>
+                        <td>20</td>
+                        <td>55</td>
+                        <td>-35</td>
+                        <td>24.4</td>
+                        <td>D D E D D</td>
+                    </tr>
+                    
+                    </tbody>
+            </table>
+        </div>
+        
+        <div class="key-stats">
+            <p><strong>Legenda das Colunas:</strong> # (Posição) | J (Jogos) | Pts (Pontos) | V (Vitórias) | E (Empates) | D (Derrotas) | GP (Gols Pró) | GC (Gols Contra) | SG (Saldo de Gols) | % (Aproveitamento).</p>
+            <p><strong>Legenda de Cores (Exemplo):</strong> <span style="color:#2ecc71;">Verde: Zona de Classificação (Libertadores)</span> | <span style="color:#3498db;">Azul: Zona de Classificação (Sul-Americana)</span> | <span style="color:var(--live-color);">Vermelho: Zona de Rebaixamento</span>.</p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Liga Master de Futebol | Plataforma Oficial de Estatísticas | Dados Atualizados em 29/11/2025</p>
+    </footer>
+
+</body>
+</html>
